@@ -1,0 +1,55 @@
+// 在custom目录下可以自定义数据查询方法
+// 这是一个定义示例
+import {connect} from "../db.js"
+import utils from "../utils.js"
+
+// 半小时查询
+async function selectOutput(stat, startDateTime, endDateTime, index = 0, TableName = "dw_bmsd") {
+  let sql = ""
+
+  await connect()
+
+  switch (index) {
+    case 0://
+      // 半小时：9:00-9:29为0，9:30-59为30
+      sql = "select DATE_FORMAT(concat( date( INTIME ), " ", HOUR ( INTIME ), ":", floor( MINUTE ( INTIME ) / 30 ) * 30 ),"%Y-%m-%d %H:%i") as time,count(*) as count" +
+        " from " + TableName +
+        " WHERE STAT ="" + stat +
+        "" AND INTIME >= DATE_FORMAT("" + startDateTime + "","%Y-%m-%d %T")" +
+        " AND INTIME<= DATE_FORMAT("" + endDateTime + "","%Y-%m-%d %T")" +
+        " GROUP BY TIME" +
+        " ORDER BY TIME ASC"
+      break
+  }
+
+  let result = {
+    metaData: [],
+    rows: []
+  }
+  // metaData
+  let rows = await utils.query(dw_bmsd, sql, {})
+  // 这里是为了生成与oracle一致的metaData数据
+  let metaData = []
+  if (rows.length > 0) {//可能有查不到数据的情况
+    let record = Object.keys(rows[0])
+    record.forEach(item => metaData.push({ name: item.toUpperCase() }))
+    result = {
+      metaData,
+      // oracle使用的是数组，不是Object，所以这里需要转一下
+      rows: rows.map(item => {
+        let arr = []
+        // 因为是sworm查询的，item[*]对象并不干净，不能直接使用for in循环
+        let keys = Object.keys(item)
+        for (let j = 0 j < keys.length j++) {
+          let k = keys[j]
+          arr.push(item[k])
+        }
+        return arr
+      })
+    }
+  }
+
+  return result
+}
+
+module.exports = selectOutput

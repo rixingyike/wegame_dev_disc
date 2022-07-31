@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{.title}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+  <!-- 最新版本的 Bootstrap v3 核心 CSS 文件 -->
+  <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+  <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+  <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-theme.min.css">
+  <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+  <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+  <!-- 一个日期选择控件 datetimepicker -->
+  <script src="/static/datetimepicker/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+  <script src="/static/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+  <link href="/static/datetimepicker/bootstrap-datetimepicker.css" rel="stylesheet" media="screen">
+  <!-- 引用图表脚本文件 -->
+  <script src="/static/js/feather.min.js"></script>
+  <script src="/static/js/Chart.min.js"></script>
+  <!-- 引用了自定义的js-->
+  <script src="/static/js/dashboard.js"></script>
+  <!-- Custom styles for this template -->
+  <link href="/static/styles/dashboard.css" rel="stylesheet">
+  <style>
+    .form-signin {
+      max-width: 330px;
+      padding: 15px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form class="form-signin" action="/accounts/login" method="post">
+      <p class="text-danger">{{.errMsg}}</p>
+      <h2 class="form-signin-heading">登录面板</h2>
+      <section>
+        <label for="nameIpt" class="sr-only">邮箱</label>
+        <input name="name" value="user1@qq.com" type="name" id="nameIpt" class="form-control" placeholder="用户名"
+          autocomplete="username" required autofocus>
+      </section>
+      <section>
+        <label for="passwdIpt" class="sr-only">密码</label>
+        <input name="passwd" value="123456" type="password" id="passwdIpt" class="form-control" placeholder="密码"
+          autocomplete="passwdIpt" aria-describedby="password-constraints" required>
+      </section>
+      <div class="checkbox">
+        <label>
+          <input checked type="checkbox" value="remember"> 记住本次登录
+        </label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+    </form>
+  </div> <!-- /container -->
+  <script>
+    // 页面加载完全后执行
+    $(function () {
+      $(".form-signin").on("submit", e => {
+        if (form.checkValidity() === false) {
+          event.preventDefault()
+        }
+        if (!/.{8,}/.test($("#passwdIpt").value)) {
+          alert("密码至少8位")
+          event.preventDefault()
+        }
+      })
+    })
+  </script>
+</body>
+</html>

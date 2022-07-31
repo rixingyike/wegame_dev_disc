@@ -1,0 +1,21 @@
+<!-- HTML：第2章\2.1\示例1\index.html -->
+<html>
+<body>
+  <ul>
+    <li>邮箱：<input value="woo@qq.com" onchange="verify.do(this.value,'email')?void(0):alert('邮箱格式不对')" /></li>
+  </ul>
+  <ul>
+    <li>手机：<input value="14637632322" onchange="verify.do(this.value,'mobile')?void(0):alert('手机格式不对')" /></li>
+  </ul>
+  <ul>
+    <li>座机：<input value="010-2839323-391" onchange="verify.do(this.value,'tel')?void(0):alert('座机格式不对')" /></li>
+  </ul>
+  <script src="./verify.js"></script>
+  <script>
+    // 添加座机验证规则
+    verify.addRule("tel", (s) => {
+      return /^(0\d{2,3}-\d{7,8})(-\d{1,4})?$/.test(s)
+    })
+  </script>
+</body>
+</html>

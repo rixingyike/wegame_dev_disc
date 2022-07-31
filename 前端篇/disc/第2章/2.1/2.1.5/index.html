@@ -1,0 +1,36 @@
+<!-- HTML：disc\第2章\2.1\2.1.5\index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>挡板小游戏</title>
+  <style>
+    canvas {
+      border: 1px solid;
+      margin: 30px;
+      width: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas">
+    您的浏览器不支持 HTML5 canvas 标签。
+  </canvas>
+  <script>
+    // 获取画布及2D渲染上下文对象
+    const canvas = document.getElementById("canvas")
+    const context = canvas.getContext("2d")
+    // context.fillText("挡板小游戏", 10, 30)
+
+    // 改变颜色和大小
+    // context.font = "STHeiti 20px"
+    context.font = "20px STHeiti" // 修正样式次序
+    context.fillStyle = "#ff0000"
+    context.fillText("挡板小游戏", 10, 30)
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,9 @@
+{{ define "left_menu" }}
+<!-- 左边侧导航列表，在这里添加子菜单 -->
+<li class='{{if eq .path "/"}}active{{end}}'>
+  <a href="/">
+    <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+    &nbsp;主页
+  </a>
+</li>
+{{ end }}

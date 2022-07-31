@@ -1,0 +1,35 @@
+<!-- HTML：disc\第3章\3.3\3.3.2\event.html -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <div id="btn3" class="btn">
+    btn3
+    <div id="btn2" class="btn">
+      btn2
+      <div id="btn1" class="btn">
+        btn1
+      </div>
+    </div>
+  </div>
+  <script>
+    let btns = document.querySelectorAll("div[id^=btn]")
+    btns.forEach(btn => btn.onclick = function (e) {
+      console.log(`btn：${btn.id}，target：${e.target.id}, currentTarget：${e.currentTarget.id}，eventPhase：${e.eventPhase}`)
+    })
+  </script>
+  <style>
+    .btn {
+      width: 100px;
+      height: 30px;
+      text-align: center;
+      display: inline-block;
+      line-height: 30px;
+      background-color: aliceblue;
+      margin: 10px 0;
+      border: 1px solid green;
+    }
+  </style>
+</body>
+
+</html>

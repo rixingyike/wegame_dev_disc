@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{.title}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script type="text/javascript" src="/static/js/jquery-1.8.3.min.js" charset="UTF-8"></script>
+  <!-- 最新版本的 Bootstrap v3 核心 CSS 文件 -->
+  <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+  <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+  <link rel="stylesheet" href="/static/bootstrap/css/bootstrap-theme.min.css">
+  <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+  <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+  <!-- 一个日期选择控件 datetimepicker -->
+  <script src="/static/datetimepicker/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+  <script src="/static/datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+  <link href="/static/datetimepicker/bootstrap-datetimepicker.css" rel="stylesheet" media="screen">
+
+  <!-- 引用图表脚本文件 -->
+  <script src="/static/js/feather.min.js"></script>
+  <script src="/static/js/Chart.min.js"></script>
+
+  <!-- 引用了自定义的js-->
+  <script src="/static/js/dashboard.js"></script>
+
+  <!-- Custom styles for this template -->
+  <link href="/static/styles/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">系统标题</a>
+      </div>
+
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav" id="mytab">
+          <li class="active"><a href="/">首页</a></li>
+          <li><a href="#">菜单2</a></li>
+          <li><a href="#">菜单3</a></li>
+        </ul>
+
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input id="searchInput" type="text" class="form-control" placeholder="搜索">
+          </div>
+          <button id="searchBtn" type="button" class="btn btn-default">搜索</button>
+        </form>
+
+        <ul class="nav navbar-nav navbar-right">
+          <!-- <li><a href="#">菜单</a></li> -->
+          <li><a href="/accounts/logout">登出</a></li>
+          <Li class="dropdown">
+            <a id="rightMenu" href="#" class="dropdown-toggle" data-toggle="dropdown">链接<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">hello1</a></li>
+              <li><a href="#">hello2</a></li>
+              <li><a href="#">hello3</a></li>
+              <li><a href="#">hello4</a></li>
+            </ul>
+          </Li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <script>
+    $("#rightMenu").click(function (e) {
+      e.preventDefault();
+      $(this).tab("show");
+    })
+  </script>
+
+  <div class="table-responsive">
+    <div class="row">
+      <div class="col-xs-3 col-sm-2 col-md-1 sidebar" style="min-width:130px;">
+        <!-- 左边栏导航 -->
+        <ul class="nav nav-sidebar">
+          {{ template "left_menu" . }}
+        </ul>
+      </div>
+      <div class="col-xs-9 col-sm-10 col-md-11 col-sm-offset-2 col-md-offset-1 col-xs-offset-3 main">
+        <h1 class="page-header">{{.title}}</h1>
+
+        <!-- 右栏主要内容区域 -->
+        {{ yield }}
+
+        <p class="gap"></p>
+        <p class="gap"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部导航 -->
+  <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    <ol class="breadcrumb">
+      <li><a href="">Home</a></li>
+      <li><a href="">Library</a></li>
+      <li><a href="">Data</a></li>
+    </ol>
+  </nav>
+</body>
+
+</html>

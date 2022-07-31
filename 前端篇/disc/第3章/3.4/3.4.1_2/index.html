@@ -1,0 +1,33 @@
+<!-- HTML：disc\第3章\3.4\3.4.1_2\index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>挡板小游戏</title>
+  <style>
+    canvas {
+      border: 1px solid;
+      margin: 30px;
+      width: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas">
+    您的浏览器不支持 HTML5 canvas 标签。
+  </canvas>
+  <!-- 挡板材质图像 -->
+  <img id="mood" style="width:100px;"
+    src="https://cdn.jsdelivr.net/gh/rixingyike/images/2021/2021090617413320210906174132.png" />
+  <!-- 音频对象 -->
+  <audio id="hit-sound">
+    <source src="./click.ogg" type="audio/ogg">
+    <source src="./click.mp3" type="audio/mp3">
+  </audio>
+  <script src="./index.js"></script>
+</body>
+
+</html>

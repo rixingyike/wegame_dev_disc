@@ -1,0 +1,47 @@
+<!-- HTML：第2章\2.9\示例45\index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>示例45</title>
+</head>
+<body>
+  <script type="text/javascript">
+    class CustomImage {
+      constructor(w = 200, h = 200) {
+        const img = document.createElement("img")
+        img.style = `width:${w}px;height:${h}px;`
+        this.#img = img
+      }
+      #img
+      setSource(url) {
+        this.#img.src = url
+      }
+      appendToView() {
+        document.body.appendChild(this.#img)
+      }
+    }
+    /** CustomImage对象的代理对象 */
+    class CustomImageProxy {
+      constructor(w, h) {
+        const img = new CustomImage(w, h)
+        this.#customImg = img
+      }
+      #customImg
+      setSource(url) {
+        const loader = new Image()
+        loader.onload = () => this.#customImg.setSource(url)
+        loader.src = url
+      }
+      appendToView() {
+        this.#customImg.appendToView()
+      }
+    }
+    // 消费代码
+    const htmlNode = new CustomImageProxy()
+    // 图片来源于Pexels上 Kate Graur 拍摄的图片，可免费使用
+    htmlNode.setSource("https://images.pexels.com/photos/5425710/pexels-photo-5425710.jpeg")
+    // 不管图像有没有加载成功，都可以在页面上添加
+    htmlNode.appendToView()
+  </script>
+</body>
+</html>

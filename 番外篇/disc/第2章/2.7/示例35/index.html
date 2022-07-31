@@ -1,0 +1,93 @@
+<!-- HTML：第2章\2.7\示例35\index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <style>
+    .box {
+      border-radius: 50%;
+      background: #98bf21;
+      height: 100px;
+      width: 100px;
+      margin: 6px;
+      position: absolute;
+      top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <button id="btn">执行</button>
+  <button id="undoBtn">撤消</button>
+  <input id="pos" value="300" />
+  <script>
+    /** 移动动画命令对象 */
+    class MoveCommand {
+      constructor(receiver, options) {
+        this.receiver = receiver
+        this.options = options
+      }
+      execute() {
+        $(this.receiver).animate(this.options)
+      }
+    }
+    /** 可撤消的移动动画命令对象 */
+    class UnableMoveCommand extends MoveCommand {
+      constructor(receiver, options, taker) {
+        super(receiver, options)
+        this.taker = taker
+      }
+      taker
+      execute() {
+        this.taker.add(new Memento().store(this.receiver, this.options))
+        super.execute()
+      }
+      undo() {
+        const options = this.taker.getCurrent()?.getState()
+        if (options) $(this.receiver).animate(options)
+      }
+    }
+    /** 备忘录对象：存储元素样式状态 */
+    class Memento {
+      state = {}
+      store(receiver, options) {
+        for (let name in options) {
+          this.state[name] = $(receiver).css(name)
+        }
+        return this
+      }
+      getState() {
+        return Object.assign({}, this.state)
+      }
+    }
+    /** 备忘录管理者 */
+    class CareTaker {
+      static #instance = new CareTaker()
+      static getInstance() {
+        return this.#instance
+      }
+      constructor() {
+        this.list = []
+      }
+      add(memento) {
+        this.list.push(memento)
+      }
+      getCurrent() {
+        return this.list.pop()
+      }
+    }
+    $(document).ready(function () {
+      let moveCommand
+      $("#btn").click(function () {
+        moveCommand = new UnableMoveCommand(".box", {
+          left: $("#pos").val()
+        }, CareTaker.getInstance())
+        setTimeout(() => moveCommand.execute(), 500)
+      })
+      $("#undoBtn").click(function () {
+        moveCommand?.undo()
+      })
+    })
+  </script>
+</body>
+</html>

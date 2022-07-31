@@ -1,0 +1,70 @@
+<!-- HTML：第2章\2.7\示例34\index.js -->
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+  <textarea rows="7" id="editor"></textarea><br />
+  <button id="undoBtn">撤消</button>
+  <script>
+    /** 备忘录状态对象 */
+    class Memento {
+      constructor(text) {
+        this.setState(text)
+      }
+      text
+      getState() {
+        return this.text
+      }
+      setState(value) {
+        this.text = value
+      }
+    }
+    /** 备忘录管理者 */
+    class CareTaker {
+      constructor() {
+        this.list = []
+      }
+      add(memento) {
+        this.list.push(memento)
+      }
+      getCurrent() {
+        return this.list.pop()
+      }
+    }
+    /** 文本编辑器 */
+    class Editor {
+      constructor(selector) {
+        this.selector = selector
+        this.content = ""
+      }
+      createMemento() {
+        const memento = new Memento(this.content)
+        this.content = $(`${this.selector}`).val()
+        return memento
+      }
+      setMemento(memento) {
+        $(`${this.selector}`).val(memento.getState())
+      }
+    }
+    // 消费代码
+    $(function () {
+      const editor = new Editor("#editor")
+        , taker = new CareTaker()
+      $(document).ready(() => {
+        $("#editor").change(e => {
+          taker.add(editor.createMemento())
+        })
+        $("#undoBtn").click(e => {
+          if (taker.list.length > 0) {
+            const memento = taker.getCurrent()
+            console.log(`即将恢复：${memento.getState()}`)
+            editor.setMemento(memento) // 撤销，恢复上一次保存的文本
+          }
+        })
+      })
+    })
+  </script>
+</body>
+</html>

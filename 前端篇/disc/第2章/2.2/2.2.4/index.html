@@ -1,0 +1,63 @@
+<!-- HTML：disc\第2章\2.2\2.2.4\index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>挡板小游戏</title>
+  <style>
+    canvas {
+      border: 1px solid;
+      margin: 30px;
+      width: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas">
+    您的浏览器不支持 HTML5 canvas 标签。
+  </canvas>
+  <script>
+    // 获取画布及2D渲染上下文对象
+    const canvas = document.getElementById("canvas")
+    const context = canvas.getContext("2d")
+
+    // 绘制不透明背景
+    context.fillStyle = "whitesmoke"
+    context.beginPath()
+    context.moveTo(0, 0)
+    context.lineTo(canvas.width, 0)
+    context.lineTo(canvas.width, canvas.height)
+    context.lineTo(0, canvas.height)
+    context.lineTo(0, 0)
+    context.stroke()
+    context.fill() // 不显式调用 fill，没有填充效果
+
+    // 实现从上向下颜色渐变
+    context.font = "italic 800 20px STHeiti"
+    const txtWidth = context.measureText("挡板小游戏").width
+    const txtHeight = context.measureText("M").width
+    const xpos = (canvas.width - txtWidth) / 2
+    const ypos = (canvas.height - txtHeight) / 2
+    const grd = context.createLinearGradient(0, ypos, 0, ypos + txtHeight)
+    grd.addColorStop(0, "red") // 添加渐变颜色点
+    grd.addColorStop(.5, "white")
+    grd.addColorStop(1, "yellow")
+    context.fillStyle = grd
+    context.textBaseline = "top" // 设置文本绘制基线
+    context.fillText("挡板小游戏", xpos, ypos)
+
+    // 绘制右挡板
+    const panelHeight = 50
+    context.lineWidth = 10 // 设置挡板宽 10px
+    context.strokeStyle = "black"
+    context.beginPath()
+    context.moveTo(canvas.width, (canvas.height - panelHeight) / 2)
+    context.lineTo(canvas.width, (canvas.height + panelHeight) / 2)
+    context.stroke()
+  </script>
+</body>
+
+</html>

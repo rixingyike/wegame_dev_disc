@@ -1,0 +1,30 @@
+<!-- HTML：第2章\2.9\示例44\index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>示例44</title>
+</head>
+<body>
+  <script type="text/javascript">
+    class CustomImage{
+      constructor(w = 200, h = 200){
+        const img = document.createElement("img")
+        img.style = `width:${w}px;height:${h}px;`
+        this.#img = img
+      }
+      #img
+      setSource(url) {
+        this.#img.src = url
+      }
+      appendToView(){
+        document.body.appendChild(this.#img)
+      }
+    }
+    const htmlNode = new CustomImage()
+    // 图片来源于Pexels上 Kate Graur 拍摄的图片，可免费使用
+    htmlNode.setSource("https://images.pexels.com/photos/5425710/pexels-photo-5425710.jpeg")
+    // 不管图像有没有加载成功，都可以在页面上添加
+    htmlNode.appendToView()
+  </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!-- HTML：disc\第2章\2.3\2.3.1_练习17\index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>挡板小游戏</title>
+  <style>
+    canvas {
+      border: 1px solid;
+      margin: 30px;
+      width: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas">
+    您的浏览器不支持 HTML5 canvas 标签。
+  </canvas>
+  <!-- 挡板材质图像 -->
+  <img id="mood" style="width:100px;"
+    src="https://cdn.jsdelivr.net/gh/rixingyike/images/2021/2021090617413320210906174132.png" />
+  <script>
+    // 获取画布及2D渲染上下文对象
+    const canvas = document.getElementById("canvas")
+    const context = canvas.getContext("2d")
+
+    // 添加阴影效果
+    context.shadowBlur = 1
+    context.shadowOffsetY = 2
+    context.shadowOffsetX = 2
+    context.shadowColor = "grey"
+
+    // 绘制不透明背景
+    context.fillStyle = "whitesmoke"
+    context.fillRect(0, 0, canvas.width, canvas.height)
+
+    // 实现从上向下颜色渐变
+    context.font = "italic 800 20px STHeiti"
+    const txtWidth = context.measureText("挡板小游戏").width
+      , txtHeight = context.measureText("M").width
+      , xpos = (canvas.width - txtWidth) / 2
+      , ypos = (canvas.height - txtHeight) / 2
+      , grd = context.createLinearGradient(0, ypos, 0, ypos + txtHeight)
+    grd.addColorStop(0, "red") // 添加渐变颜色点
+    grd.addColorStop(.5, "white")
+    grd.addColorStop(1, "yellow")
+    context.fillStyle = grd
+    context.textBaseline = "top" // 设置文本绘制基线
+    context.fillText("挡板小游戏", xpos, ypos)
+
+    // 使用材质填充对象绘制右挡板
+    // const panelHeight = 50
+    // const img = document.getElementById("mood")
+    // img.onload = function () {
+    //   const pat = context.createPattern(img, "no-repeat")
+    //   context.fillStyle = pat
+    //   context.fillRect(canvas.width - 5, (canvas.height - panelHeight) / 2, 5, panelHeight)
+    // }
+
+    // 使用弧线绘制圆
+    const radius = 10
+    const pos1 = { x: canvas.width / 2 + radius, y: canvas.height / 2 }
+    const pos2 = { x: canvas.width / 2, y: canvas.height / 2 + radius }
+    const pos3 = { x: canvas.width / 2 - radius, y: canvas.height / 2 }
+    const pos4 = { x: canvas.width / 2, y: canvas.height / 2 - radius }
+    context.fillStyle = "white"
+    context.beginPath()
+    context.moveTo(pos1.x, pos1.y)
+    // context.arcTo(pos1.x, pos1.y, pos2.x, pos2.y, radius)
+    // context.arcTo(pos2.x, pos2.y, pos3.x, pos3.y, radius)
+    // context.arcTo(pos3.x, pos3.y, pos4.x, pos4.y, radius)
+    // context.arcTo(pos4.x, pos4.y, pos1.x, pos1.y, radius)
+    context.arcTo(pos1.x, pos1.y + radius, pos2.x, pos2.y, radius)
+    context.arcTo(pos2.x - radius, pos2.y, pos3.x, pos3.y, radius)
+    context.arcTo(pos3.x, pos3.y - radius, pos4.x, pos4.y, radius)
+    context.arcTo(pos4.x + radius, pos4.y, pos1.x, pos1.y, radius)
+    context.stroke()
+    context.fill()
+
+    // 思考与练习17，使用arcTo绘制右挡板
+    const panelHeight = 50
+    const panelWidth = 10,
+      round = 4 // 圆角跨度
+      p1 = { x: canvas.width - panelWidth, y: (canvas.height - panelHeight) / 2 },
+      p2 = { x: canvas.width, y: (canvas.height - panelHeight) / 2 },
+      p3 = { x: canvas.width, y: (canvas.height + panelHeight) / 2 },
+      p4 = { x: canvas.width - panelWidth, y: (canvas.height + panelHeight) / 2 }
+    context.fillStyle = "brown"
+    context.lineWidth = 2
+    context.beginPath()
+    context.moveTo(p1.x + round, p1.y)
+    context.lineTo(p2.x - round, p2.y)
+    context.arcTo(p2.x, p2.y, p2.x, p2.y + round, round)
+    context.lineTo(p3.x, p3.y - round)
+    context.arcTo(p3.x, p3.y, p3.x - round, p3.y, round)
+    context.lineTo(p4.x + round, p4.y)
+    context.arcTo(p4.x, p4.y, p4.x, p4.y - round, round)
+    context.lineTo(p1.x, p1.y + round)
+    context.arcTo(p1.x, p1.y, p1.x + round, p1.y, round)
+    context.stroke()
+    context.fill()
+  </script>
+</body>
+
+</html>

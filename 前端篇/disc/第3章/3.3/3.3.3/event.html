@@ -1,0 +1,18 @@
+<!-- HTML：disc\第3章\3.3\3.3.3\event.html -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <script>
+    window.addEventListener("click", function (e) {
+      console.log("单击已发生") // 单击已发生
+      return false
+    }, false)
+    window.removeEventListener("click", function (e) {
+      console.log("监听已移除")
+      return false
+    }, true)
+  </script>
+</body>
+
+</html>

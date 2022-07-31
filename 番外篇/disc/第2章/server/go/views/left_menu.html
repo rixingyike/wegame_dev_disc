@@ -1,0 +1,15 @@
+{{ define "left_menu" }}
+<!-- 左边侧导航列表，在这里添加子菜单 -->
+<li class='{{if eq .path "/"}}active{{end}}'>
+  <a href="/">
+    <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+    &nbsp;主页
+  </a>
+</li>
+<li class='{{if eq .path "/histories"}}active{{end}}'>
+  <a href="/histories">
+    <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+    &nbsp;历史记录
+  </a>
+</li>
+{{ end }}

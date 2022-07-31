@@ -1,0 +1,45 @@
+{
+  "name": "node_koa2",
+  "version": "1.0.0",
+  "description": "Node.js koa2项目模板",
+  "main": "main.js",
+  "bin": "main.js",
+  "scripts": {
+    "build": "babel ./ --out-dir ../node_dist --ignore node_modules,static && cp -r ./node_modules ../node_dist/ && cp -r ./static ../node_dist/",
+    "dev": "cross-env DEBUG=sworm && nodemon --exec babel-node main.js"
+  },
+  "author": "石桥码农 <9830131@qq.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@koa/router": "^10.0.0",
+    "@types/node": "^14.14.14",
+    "art-template": "^4.13.2",
+    "axios": "^0.24.0",
+    "co-wechat-api": "^3.11.0",
+    "crypto": "^1.0.1",
+    "html-minifier": "^4.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.13.0",
+    "koa-art-template": "^1.1.1",
+    "koa-body": "^4.2.0",
+    "koa-session": "^6.2.0",
+    "koa-static-server": "^1.5.2",
+    "koa2-cors": "^2.0.6",
+    "md5": "^2.3.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "oracledb": "^5.1.0",
+    "reflect-metadata": "^0.1.13",
+    "request": "^2.88.2",
+    "short-uuid": "^4.2.0",
+    "sworm": "^3.8.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/node": "^7.15.8",
+    "@babel/preset-env": "^7.16.0",
+    "@babel/register": "^7.16.0",
+    "cross-env": "^7.0.3"
+  }
+}

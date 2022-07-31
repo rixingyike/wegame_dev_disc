@@ -1,0 +1,9 @@
+"use strict"
+import { unconected as db } from "../db.js"
+
+/**
+ * 选项table：table名称是什么，这里table参数就传递什么
+ * 选项id：如果id不是主键，使用id参数更改
+ * @see https://github.com/featurist/sworm
+ */
+export default db.model({ table: "account", id: "id" })

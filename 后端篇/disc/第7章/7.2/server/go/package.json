@@ -1,0 +1,15 @@
+{
+  "name": "go_iris",
+  "version": "1.0.0",
+  "description": "基于iris+xorm实现的Go语言Web项目模板",
+  "main": "main.js",
+  "bin": "main.js",
+  "scripts": {
+    "dev": "set DEBUG=true && gin --appPort=8080 --port=3000 run main.go",
+    "build_windows": "SET CGO_ENABLED=0 GOOS=windows GOARCH=amd64 && go build -o ../go_dist/minigame_server_windows.exe main.go && cp -rf ./static ../go_dist/ && cp -rf ./views ../go_dist/",
+    "build_mac": "SET CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 && go build -o ../go_dist/minigame_server_mac.exe main.go && cp -rf ./static ../go_dist/ && cp -rf ./views ../go_dist/",
+    "build_linux": "SET CGO_ENABLED=0 GOOS=linux GOARCH=amd64 && go build -o ../go_dist/minigame_server_linux.exe main.go && cp -rf ./static ../go_dist/ && cp -rf ./views ../go_dist/"
+  },
+  "author": "石桥码农 <9830131@qq.com>",
+  "license": "MIT"
+}

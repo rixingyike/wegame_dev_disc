@@ -1,0 +1,50 @@
+<!-- HTML：第2章\2.8\示例40\index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>示例40</title>
+</head>
+<body>
+  <button id="btn1">btn1</button>
+  <button id="btn2">btn2</button>
+  <script type="text/javascript">
+    function onClickDocument(event) {
+      // 阻止默认行为
+      event = event || window.event
+      if (event.preventDefault) { // 阻止默认行为
+        event.preventDefault() 
+      } else { // IE
+        event.returnValue = false 
+      } 
+      const element = event.target || event.srcElement // IE
+      if (element == document.querySelector("#btn1")) {
+        console.log("单击对象是btn1")
+      } else {
+        console.log(`单击对象是${element.id || element.nodeName}`)
+      }
+    }
+    function onClickBtn1(event) {
+      console.log("单击了btn1")
+    }
+
+    // 给document添加click事件监听
+    if (document.addEventListener) {
+      document.addEventListener("click", onClickDocument, false)
+    } else if (document.attachEvent) {
+      document.attachEvent("onclick", onClickDocument) // IE
+    } else {
+      document["onclick"] = onClickDocument // Other
+    }
+
+    // 给btn1添加click事件监听
+    const btn1 = document.querySelector("#btn1")
+    if (btn1.addEventListener) {
+      btn1.addEventListener("click", onClickBtn1, false)
+    } else if (btn1.attachEvent) {
+      btn1.attachEvent("onclick", onClickBtn1) // IE
+    } else {
+      btn1["onclick"] = onClickBtn1 // Other
+    }
+  </script>
+</body>
+</html>

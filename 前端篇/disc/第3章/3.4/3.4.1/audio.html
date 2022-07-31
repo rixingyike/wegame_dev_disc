@@ -1,0 +1,38 @@
+<!-- HTML：disc\第3章\3.4\3.4.1\audio.html -->
+<!DOCTYPE html>
+<html>
+
+<body>
+  <audio id="sound">
+    <source src="click.mp3" type="audio/mp3">
+    <source src="click.ogg" type="audio/ogg">
+  </audio>
+  <button onclick="play()">play</button>
+  <button onclick="pause()">pause</button>
+  <button onclick="stop()">stop</button>
+  <button onclick="replay(event)">replay</button>
+  <script>
+    const audio = document.getElementById("sound")
+    // 播放(继续播放)
+    function play() {
+      audio.play()
+    }
+    // 暂停
+    function pause() {
+      audio.pause()
+    }
+    // 停止
+    function stop() {
+      audio.pause()
+      audio.currentTime = 0
+    }
+    // 重新播放
+    function replay(e) {
+      console.log('e', e)
+      audio.currentTime = 0
+      audio.play()
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!-- HTML：disc\第2章\2.4\2.4.5\index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>挡板小游戏</title>
+  <style>
+    canvas {
+      border: 1px solid;
+      margin: 30px;
+      width: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas">
+    您的浏览器不支持 HTML5 canvas 标签。
+  </canvas>
+  <!-- 挡板材质图像 -->
+  <img id="mood" style="width:100px;"
+    src="https://cdn.jsdelivr.net/gh/rixingyike/images/2021/2021090617413320210906174132.png" />
+  <script>
+    // 获取画布及2D渲染上下文对象
+    const canvas = document.getElementById("canvas")
+    const context = canvas.getContext("2d")
+
+    // 添加阴影效果
+    context.shadowBlur = 1
+    context.shadowOffsetY = 2
+    context.shadowOffsetX = 2
+    context.shadowColor = "grey"
+
+    // 绘制不透明背景
+    context.fillStyle = "whitesmoke"
+    context.fillRect(0, 0, canvas.width, canvas.height)
+
+    // 使用 while 循环绘制分界线
+    context.strokeStyle = "whitesmoke"
+    context.lineWidth = 1
+    context.beginPath()
+    const startX = canvas.width / 2
+    let posY = 0
+    while (posY < canvas.height) {
+      context.moveTo(startX, posY)
+      context.lineTo(startX, posY + 10)
+      posY += 20
+    }
+    context.stroke()
+
+    // 实现从上向下颜色渐变
+    context.font = "italic 800 20px STHeiti"
+    const txtWidth = context.measureText("挡板小游戏").width
+      , txtHeight = context.measureText("M").width
+      , xpos = (canvas.width - txtWidth) / 2
+      , ypos = (canvas.height - txtHeight) / 2
+      , grd = context.createLinearGradient(0, ypos, 0, ypos + txtHeight)
+    grd.addColorStop(0, "red") // 添加渐变颜色点
+    grd.addColorStop(.5, "white")
+    grd.addColorStop(1, "yellow")
+    context.fillStyle = grd
+    context.textBaseline = "top" // 设置文本绘制基线
+    context.fillText("挡板小游戏", xpos, ypos)
+
+    // 使用材质填充对象绘制右挡板
+    const panelHeight = 50
+    const img = document.getElementById("mood")
+    img.onload = function () {
+      const pat = context.createPattern(img, "no-repeat")
+      context.fillStyle = pat
+      context.fillRect(canvas.width - 5, (canvas.height - panelHeight) / 2, 5, panelHeight)
+    }
+
+    // 通过arc绘制圆
+    const radius = 10
+    context.fillStyle = "white"
+    context.beginPath()
+    context.arc(canvas.width / 2, canvas.height / 2, radius, 0, 2 * Math.PI)
+    context.fill()
+  </script>
+</body>
+
+</html>

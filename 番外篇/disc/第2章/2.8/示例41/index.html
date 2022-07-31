@@ -1,0 +1,28 @@
+<!-- HTML：第2章\2.8\示例41\index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>示例41</title>
+</head>
+<body>
+  <button id="btn1">btn1</button>
+  <button id="btn2">btn2</button>
+  <script type="module">
+    // 引入BrowserFacade模块
+    import BrowserFacade from "./browser_facade.js"
+    const btn1 = document.querySelector("#btn1")
+    BrowserFacade.addEvent(btn1, "click", (e) => {
+      console.log("单击了btn1")
+    })
+    BrowserFacade.addEvent(document, "click", (e) => {
+      BrowserFacade.preventDefault(e)
+      const element = BrowserFacade.getTarget(e)
+      if (element == btn1) {
+        console.log("单击对象是btn1")
+      } else {
+        console.log(`单击对象是${element.id || element.tagName}`)
+      }
+    })
+  </script>
+</body>
+</html>

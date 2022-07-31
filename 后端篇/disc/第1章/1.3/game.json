@@ -1,0 +1,8 @@
+{
+    "deviceOrientation": "portrait",
+    "permission": {
+        "scope.userLocation": {
+            "desc": "在线显示玩家城市"
+        }
+    }
+}

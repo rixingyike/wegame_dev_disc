@@ -1,0 +1,43 @@
+<!-- HTML：第2章\2.5\示例24\index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <style>
+    .box {
+      border-radius: 50%;
+      background: #98bf21;
+      height: 100px;
+      width: 100px;
+      margin: 6px;
+      position: absolute;
+      top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <button id="btn">执行</button>
+  <input id="pos" value="300" />
+  <script>
+    class MoveCommand {
+      constructor(receiver, options) {
+        this.receiver = receiver
+        this.options = options
+      }
+      execute() {
+        $(this.receiver).animate(this.options)
+      }
+    }
+    $(document).ready(function () {
+      let moveCommand
+      $("#btn").click(function () {
+        moveCommand = new MoveCommand(".box", {
+          left: $("#pos").val()
+        })
+        setTimeout(()=>moveCommand.execute(), 500)
+      })
+    })
+  </script>
+</body>
+</html>
