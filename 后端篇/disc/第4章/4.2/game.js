@@ -112,7 +112,7 @@ class Game extends EventDispatcher {
     this.#currentPage.start()
   }
 
-  /** 游戏结束，公开就放在私有方法的上面 */
+  /** 游戏结束，公开方法就放在私有方法的上面 */
   end() {
     this.#currentPage?.end()
     cancelAnimationFrame(this.#frameId)

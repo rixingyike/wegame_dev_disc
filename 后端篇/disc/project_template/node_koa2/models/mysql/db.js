@@ -36,4 +36,4 @@ export function connect() {
 }
 
 // 未连接的数据库连接对象
-export const unconected = db
+export const unconnected = db

@@ -44,15 +44,6 @@ class CloudFunctionManager {
     }, HISTORY)
   }
 
-  /** 写入游戏历史数据 */
-  async writeHistoryData(userScore, systemScore) {
-    return await this.write({
-      dateCreated: new Date(),
-      userScore,
-      systemScore
-    }, HISTORY)
-  }
-
   /** 读取游戏历史数据 */
   async readHistoryDatas() {
     return await this.read(HISTORY)

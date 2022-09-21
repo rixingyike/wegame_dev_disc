@@ -1,5 +1,5 @@
 "use strict"
-import { unconected as db } from "../db.js"
+import { unconnected as db } from "../db.js"
 
 /**
  * table名称是什么，这里table参数就传递什么

@@ -77,7 +77,7 @@ function setMiddlewaresForControllers(app, dir, beforeMiddleware, afterMiddlewar
   const controllersDir = dir || "controllers"
   const router = new Router()
 
-  // 这行代码只能放在添加addControllers前面
+  // 这行代码只能放在添加addControllersInDir前面
   if (beforeMiddleware) router.use(beforeMiddleware)
   addControllersInDir(router, controllersDir)
   if (afterMiddleware) router.use(afterMiddleware)
