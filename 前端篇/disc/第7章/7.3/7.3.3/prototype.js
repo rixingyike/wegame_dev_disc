@@ -18,7 +18,7 @@ SubType.prototype = new SuperType()
 SubType.prototype.getSubValue = function () {
   return this.subProperty
 }
-// 重写父类的方法
+// 重写父类中的方法
 SubType.prototype.getSuperValue = function () {
   return this.property
 }
@@ -28,6 +28,6 @@ SubType.prototype.callSuperMethod = function () {
 
 // 实例化
 const instance = new SubType()
-console.log("getSubValue", instance.getSubValue()) // Output：false
+console.log("getSubValue", instance.getSubValue()) // Output：true
 console.log("getSuperValue", instance.getSuperValue()) // Output：true
 console.log("callSuperMethod", instance.callSuperMethod()) // Output：true

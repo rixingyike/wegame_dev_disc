@@ -1,0 +1,20 @@
+// Go：第6章\6.4\示例80\main.go
+package main
+
+import "fmt"
+
+type Technology struct {
+	Name string
+	age  int
+}
+
+func (t Technology) Print() {
+	fmt.Printf("Name：%s，age：%d\n", t.Name, t.age)
+}
+
+func main() {
+	var t = &Technology{"小游戏", 3}
+	t.Name = "全栈开发"
+	t.age = 10
+	t.Print()
+}

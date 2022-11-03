@@ -9,9 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.16.5"
+    "@babel/core": "^7.19.6"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.16.5"
+    "@babel/preset-env": "^7.19.4"
   }
 }
