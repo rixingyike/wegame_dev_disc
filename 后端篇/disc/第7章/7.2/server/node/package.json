@@ -8,7 +8,7 @@
     "build": "babel ./ --out-dir ../node_dist --ignore node_modules,static && cp -r ./node_modules ../node_dist/ && cp -r ./static ../node_dist/",
     "dev": "cross-env DEBUG=sworm && nodemon --exec babel-node main.js"
   },
-  "author": "石桥码农 <9830131@qq.com>",
+  "author": "LIYI <9830131@qq.com>",
   "license": "MIT",
   "dependencies": {
     "@koa/router": "^10.0.0",
